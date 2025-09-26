@@ -94,6 +94,4 @@ function bids() {
     // O(T × n log n) donde T = casos de prueba, n = P + C elementos por caso
 }
 
-// Ejecutar versión optimizada
-bids
-();
+bids();
