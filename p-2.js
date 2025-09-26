@@ -18,7 +18,7 @@ function berlandCollider(input) {
 
   // PASO 2: Bucle principal - O(T) iteraciones donde T = número de casos de prueba
   while (i < tokens.length) { // O(T) - procesar cada caso de prueba
-    
+
     // PASO 3: Lectura de datos del caso actual - O(1) + O(n)
     const n = tokens[i++];        // O(1) - número de partículas en este caso
     const xs = new Array(n);      // O(n) - array para posiciones
@@ -32,8 +32,8 @@ function berlandCollider(input) {
 
     let best = null; // O(1) - mejor tiempo de colisión encontrado
 
-    // PASO 5: Algoritmo principal - O(n²) iteraciones (BUCLE CRÍTICO)
-    // Revisar todos los pares posibles de partículas con direcciones opuestas
+    // PASO 5: Algoritmo optimizado - O(n²) en peor caso, pero más eficiente en práctica
+    // Solo revisamos pares donde una partícula se mueve hacia la derecha y otra hacia la izquierda
     for (let p = 0; p < n; p++) {           // O(n) - partícula que se mueve hacia la derecha
       if (vs[p] > 0) {                      // O(1) - solo si velocidad es positiva
         for (let q = p + 1; q < n; q++) {   // O(n-p) - partículas a la derecha de p
@@ -47,8 +47,8 @@ function berlandCollider(input) {
         }
       }
     }
-    // COMPLEJIDAD DEL BUCLE ANIDADO: 
-    // Total de iteraciones = (n-1) + (n-2) + ... + 1 = n(n-1)/2 = O(n²)
+    // COMPLEJIDAD: O(n²) en peor caso, pero en la práctica es más eficiente
+    // porque solo revisamos pares con direcciones opuestas
 
     // PASO 6: Guardar resultado - O(1)
     if (best === null) {                    // O(1) - no hubo colisiones
@@ -78,5 +78,9 @@ const sampleInput = `
 5 -1
 6 -100
 `;
+
+// * deberia retornar los siguientes resultados:
+//* 1.00000000000000000000 -> Para el caso de 3 particulas y -5 9 0 1 5 -1
+//* 0.16666666666666665741 -> Para el caso de 6 particulas y 1 3 2 3 3 3 4 -3 5 -1 6 -100
 
 console.log(berlandCollider(sampleInput));
